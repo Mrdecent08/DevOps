@@ -1,0 +1,32 @@
+---
+- hosts: all
+  gather_facts: yes         # To get destails of machine (default=yes)
+  become: true
+  vars: 
+  tasks:
+    - name: Install Git on Redhat
+      yum:
+        name: git
+        state: present
+      when: ansible_os_family == "RedHat"
+    - name: Install Git If Not present
+      tags:
+        - installation
+      yum:
+        name: Get Git Version
+        shell: git --version
+        register: gitVersion
+        ignore_errors: yes
+    - name: Checking Git is Installed or not
+      when: gitVersion.stdout == ""
+      debug: 
+        msg: "Git is Not Installed"
+      yum:
+        name: git
+        state: present
+    - name: Install Git on Ubuntu
+      apt:
+        name: git
+        state: present
+      when: ansible_os_family == "Debian"     
+...

@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  vars: 
+  tasks:
+    - name: Install List of Packages
+      yum:
+        name: "{{item.name}}"
+        state: "{{item.state}}"
+      loop:
+        - {'name':'git','state':'present'}
+        - {'name':'httpd','state':'present'}
+        - {'name':'unzip','state':'present'}
+...

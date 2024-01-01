@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: true
+  vars:
+    companyName: Srinivas
+  tasks:
+    - name: Install Apache Http Server
+      yum: 
+        name: httpd
+        state: latest
+    - name: Copy File
+      template:
+        src: index.html
+        dest: /var/www/html/index.html
+      notify:
+        - Restart Apache Server # If there is any change in the file, then the service in handler will be executed.
+
+  handlers:  # Handlers are used to restart the services after the tasks are completed.
+    - name: Restart Apache Server
+      service:
+        name: httpd
+        state: restarted
+        enabled: true
+...
+
+
+# ansible-playbook pingServers.yaml --extra-vars "companyName=MSS"  ----> Running a playbook with variable values

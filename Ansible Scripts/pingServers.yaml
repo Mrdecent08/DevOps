@@ -1,0 +1,15 @@
+---
+- name: Ping all Servers
+  hosts: all # group name 
+  tasks:
+  - name: Ping Server
+    ping: 
+...
+
+# ansible-playbook pingServers.yaml ----> Running a playbook
+# ansible-playbook pingServers.yaml --syntax-check
+# ansible-playbook pingServers.yaml --check  ----> Dry Run
+# ansible-playbook localhost -m setup
+# ansible-playbook ConditionalStatements.yaml --tags 'tag_name,tag_name,...'
+# ansible-playbook ConditionalStatements.yaml --skip-tags 'tag_name,tag_name,...'
+# ansible-playbook ConditionalStatements.yaml --list-tags 

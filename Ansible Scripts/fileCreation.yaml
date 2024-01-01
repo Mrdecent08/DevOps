@@ -1,0 +1,13 @@
+---
+- name: Creation of a File
+  hosts: all
+  become: true    # true indicates sudo access
+  tasks: 
+    - name : Create a File
+      file: 
+        path: /tmp/srinivas.sh
+        mode: 0777  # 0 indicates sticky bit if it is 1 then no user can remove the file
+        owner: ec2-user
+        group: ec2-user
+        state: touch
+...

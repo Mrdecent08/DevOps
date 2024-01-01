@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: true
+  vars:
+    companyName: Srinivas
+  tasks:
+    - name: Install Apache Http Server
+      yum: 
+        name: httpd
+        state: latest
+    - name: Display Nodes status
+      debug:
+        var: companyName
+        msg: "The variable value is : {{companyName}}"
+    - name: Copy File
+      template:
+        src: index.html
+        dest: /var/www/html/index.html
+    - name: Running Apache Server
+      service:
+        name: httpd
+        state: started
+        enabled: true
+...
+
+
+# ansible-playbook pingServers.yaml --extra-vars "companyName=MSS"  ----> Running a playbook with variable values

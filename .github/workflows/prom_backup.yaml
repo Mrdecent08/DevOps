@@ -1,6 +1,7 @@
 name: prom-data-backup
 
 on: push
+
 jobs:
   prom-data-backup:
     runs-on: ubuntu-latest
@@ -20,18 +21,21 @@ jobs:
           cd Docker
           ls
           docker-compose -f ./docker-compose.yaml up -d
-          sleep 500
+          sleep 60  # Wait 60 seconds to ensure Prometheus starts and scrapes data
 
       - name: List all Docker containers
         run: |
           docker ps -a
-          sudo cp Docker/docker-compose.yaml Docker/prometheus_data/
 
-      - name: Backup prometheus data
+      - name: Copy Prometheus Data from Container
         run: |
+          # Get the current date for backup naming
           BACKUP_DIR="/backup/prom-$(date +'%Y-%m-%d')"
-          mkdir -p $BACKUP_DIR  # Create the folder
-          sudo cp -r Docker/prometheus_data/* $BACKUP_DIR/ 
+          mkdir -p $BACKUP_DIR  # Create the folder if it doesn't exist
+          
+          # Copy data directly from the container's volume
+          docker cp prometheus:/prometheus/. $BACKUP_DIR/
+          echo "Prometheus data has been backed up to: $BACKUP_DIR"
 
       - name: List all backup files
         run: |

@@ -23,7 +23,9 @@ jobs:
           sleep 100
           
       - name: List all Docker containers
-        run: docker ps -a
+        run: |
+          docker ps -a
+          ls Docker/
 
 
       - name: list all prometheus data

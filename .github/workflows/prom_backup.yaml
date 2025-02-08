@@ -20,9 +20,11 @@ jobs:
           cd Docker
           ls
           docker-compose -f ./docker-compose.yaml up -d
-
+          sleep 30
+          
       - name: List all Docker containers
         run: docker ps -a
+
 
       - name: list all prometheus data
         run: | 

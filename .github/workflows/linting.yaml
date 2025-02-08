@@ -11,3 +11,12 @@ jobs:
         run: ls
       - name: Ansible Linting
         uses: ansible/ansible-lint@main
+  docker-compose-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v4
+      - name: docker compose lint
+        uses: sjafferali/docker-compose-lint-action@v0.1.2
+        with:
+          compose-file: './Docker/docker-compose.yaml'

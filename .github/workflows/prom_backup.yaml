@@ -20,7 +20,7 @@ jobs:
           cd Docker
           ls
           docker-compose -f ./docker-compose.yaml up -d
-          sleep 30
+          sleep 100
           
       - name: List all Docker containers
         run: docker ps -a

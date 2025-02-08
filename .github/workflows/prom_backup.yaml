@@ -28,4 +28,5 @@ jobs:
         run: docker ps -a
 
       - name: list all prometheus data
-        run: ls prometheus_data/
+        run: | 
+          ls 

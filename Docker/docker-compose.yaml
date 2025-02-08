@@ -5,10 +5,15 @@ services:
     image: prom/prometheus:latest
     container_name: prometheus
     ports:
-      - "9090:9090"  # Expose Prometheus web interface
+      - "9090:9090"  # Expose Prometheus on port 9090
     volumes:
-      - ./prometheus_data:/prometheus  # Mount volume for persistent data storage
+      - prometheus_data:/prometheus  # Mount the volume for persistent data
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Mount the custom configuration file
     restart: unless-stopped
+
+volumes:
+  prometheus_data:
+    driver: local  # Create a persistent volume
 
 # Defines the volume that stores Prometheus data
 

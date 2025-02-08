@@ -1,22 +1,37 @@
-version: '3.8'
+version: '3.7'
 
 services:
-  web:
-    image: nginx:latest
-    container_name: nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
     ports:
-      - "80:80"
-    depends_on:
-      - app
+      - "9090:9090"  # Expose Prometheus web interface
+    volumes:
+      - ./prometheus_data:/prometheus  # Mount volume for persistent data storage
+    restart: unless-stopped
 
-  app:
-    image: node:14
-    container_name: node-app
-    working_dir: /usr/src/app
-    volumes:
-      - ./app:/usr/src/app
-    command: ["node", "index.js"]
-    ports:
-      - "3000:3000"
+# Defines the volume that stores Prometheus data
+
+
+# version: '3.8'
+
+# services:
+#   web:
+#     image: nginx:latest
+#     container_name: nginx
+#     volumes:
+#       - ./nginx.conf:/etc/nginx/nginx.conf
+#     ports:
+#       - "80:80"
+#     depends_on:
+#       - app
+
+#   app:
+#     image: node:14
+#     container_name: node-app
+#     working_dir: /usr/src/app
+#     volumes:
+#       - ./app:/usr/src/app
+#     command: ["node", "index.js"]
+#     ports:
+#       - "3000:3000"

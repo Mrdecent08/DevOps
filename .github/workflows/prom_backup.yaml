@@ -27,5 +27,4 @@ jobs:
       - name: list all prometheus data
         run: | 
           cd Docker
-          ls 
-          ls ./prometheus_data
+          ls ./prometheus_data/

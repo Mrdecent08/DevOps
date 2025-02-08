@@ -1,7 +1,7 @@
 name: linting
 on:
   workflow_dispatch:
-job:
+jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:

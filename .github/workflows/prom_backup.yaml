@@ -1,13 +1,15 @@
 name: prom-data-backup
+
 on: push
 
 jobs:
   prom-data-backup:
     runs-on: ubuntu-latest
+
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
-        
+
       - name: Set up Docker Compose
         run: |
           # Install Docker Compose
@@ -20,14 +22,18 @@ jobs:
           ls
           docker-compose -f ./docker-compose.yaml up -d
           sleep 500
-          
+
       - name: List all Docker containers
         run: |
           docker ps -a
           sudo cp Docker/docker-compose.yaml Docker/prometheus_data/
 
+      - name: Backup prometheus data
+        run: |
+          BACKUP_DIR="/backup/prom-$(date +'%Y-%m-%d')"
+          mkdir -p $BACKUP_DIR  # Create the folder
+          sudo cp -r Docker/prometheus_data/* $BACKUP_DIR/ 
 
-      - name: list all prometheus data
-        run: | 
-          cd Docker/prometheus_data/
-          ls
+      - name: List all backup files
+        run: |
+          ls /backup/prom-$(date +'%Y-%m-%d')

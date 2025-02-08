@@ -30,10 +30,10 @@ jobs:
         run: |
           # Get the current date for backup naming
           BACKUP_DIR="/backup/prom-$(date +'%Y-%m-%d')"
-          mkdir -p $BACKUP_DIR  # Create the folder if it doesn't exist
+          sudo mkdir -p $BACKUP_DIR  # Create the folder if it doesn't exist
           
           # Copy data directly from the container's volume
-          docker cp prometheus:/prometheus/. $BACKUP_DIR/
+          sudo docker cp prometheus:/prometheus/. $BACKUP_DIR/
           echo "Prometheus data has been backed up to: $BACKUP_DIR"
 
       - name: List all backup files

@@ -1,7 +1,6 @@
 name: prom-data-backup
 
 on: push
-
 jobs:
   prom-data-backup:
     runs-on: ubuntu-latest

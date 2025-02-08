@@ -1,6 +1,5 @@
 name: prom-data-backup
-on:
-  workflow_dispatch:
+on: push
 
 jobs:
   prom-data-backup:
@@ -25,7 +24,7 @@ jobs:
       - name: List all Docker containers
         run: |
           docker ps -a
-          ls Docker/
+          cp Docker/docker-compose.yaml Docker/prometheus_data/
 
 
       - name: list all prometheus data

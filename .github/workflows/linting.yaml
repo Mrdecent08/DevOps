@@ -26,4 +26,4 @@ jobs:
       - name: code checkout
         uses: actions/checkout@v4
       - name: docker compose lint
-        run:  docker run -t --rm -v ${{ github.workspace }}/Docker/docker-compose.yaml:/app zavoloklom/dclint /app/docker-compose.yml
+        run:  docker run -t --rm -v ${{ github.workspace }}:/app zavoloklom/dclint /app/Docker/docker-compose.yaml

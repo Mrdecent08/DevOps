@@ -1,1 +1,18 @@
 
+name: prom-data=backup
+on:
+  workflow_dispatch:
+jobs:
+  prom-data-backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v4
+      - name: docker compose lint
+        run:|
+          cd Docker
+          ls
+          docker compose up -f ./Docker/docker-compose.yaml
+      - name: list all docker containers
+        run: docker ps -a
+        

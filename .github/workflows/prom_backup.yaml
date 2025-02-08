@@ -12,7 +12,7 @@ jobs:
         run: |
           cd Docker
           ls
-          docker compose up -f ./Docker/docker-compose.yaml
+          docker-compose -f ./Docker/docker-compose.yaml up
       - name: list all docker containers
         run: docker ps -a
         

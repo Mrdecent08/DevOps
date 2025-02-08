@@ -24,7 +24,7 @@ jobs:
       - name: List all Docker containers
         run: |
           docker ps -a
-          cp Docker/docker-compose.yaml Docker/prometheus_data/
+          sudo cp Docker/docker-compose.yaml Docker/prometheus_data/
 
 
       - name: list all prometheus data
